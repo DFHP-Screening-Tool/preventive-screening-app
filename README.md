@@ -65,6 +65,8 @@ Suggestions and pull requests are welcome. Please ensure your updates align with
 ## 📜 License
 
 This tool is open source and free to use under the MIT License.
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -214,9 +216,108 @@ This tool is open source and free to use under the MIT License.
     };
 
     const screeningData = {
-      universal: [],
-      female: [],
-      male: []
+      universal: [
+        {
+          name: 'Type 2 Diabetes',
+          guideline: 'Diabetes Canada Guidelines, 2018',
+          link: 'https://guidelines.diabetes.ca/cpg/chapter4',
+          test: 'A1C and/or FPG',
+          frequency: 'Every 3 years ≥40 years or if high risk',
+          brackets: { '18-20': '➖', '21-29': '➖', '30-39': '➖', '40-49': '➕', '50-59': '➕', '60+': '➕' }
+        },
+        {
+          name: 'Hypertension',
+          guideline: 'Hypertension Canada Guidelines, 2020',
+          link: 'https://hypertension.ca/guidelines/',
+          test: 'Office blood pressure measurement',
+          frequency: 'At every appropriate primary care visit',
+          brackets: { '18-20': '✔', '21-29': '✔', '30-39': '✔', '40-49': '✔', '50-59': '✔', '60+': '✔' }
+        },
+        {
+          name: 'Obesity',
+          guideline: 'Obesity Canada Guidelines, 2020',
+          link: 'https://obesitycanada.ca/healthcare-professionals/adult-clinical-practice-guideline/',
+          test: 'Height, weight, and BMI calculation',
+          frequency: 'At every appropriate primary care visit',
+          brackets: { '18-20': '✔', '21-29': '✔', '30-39': '✔', '40-49': '✔', '50-59': '✔', '60+': '✔' }
+        },
+        {
+          name: 'Hyperlipidemia',
+          guideline: 'CCS Dyslipidemia Guidelines, 2021',
+          link: 'https://ccs.ca/guideline/2021-lipids/',
+          test: 'Lipid panel with CVD risk assessment',
+          frequency: 'Starting at age 40, as per risk tools (FRS/CLEM)',
+          brackets: { '18-20': 'N/A', '21-29': 'N/A', '30-39': 'N/A', '40-49': '✔', '50-59': '✔', '60+': '✔' }
+        },
+        {
+          name: 'Chlamydia & Gonorrhea',
+          guideline: 'CTFPHC, 2021',
+          link: 'https://canadiantaskforce.ca/guidelines/published-guidelines/chlamydia-and-gonorrhea/',
+          test: 'NAAT testing (self or clinician-collected)',
+          frequency: 'Annually for sexually active under 30, if not high-risk group',
+          brackets: { '18-20': '➕', '21-29': '➕', '30-39': '➖', '40-49': '➖', '50-59': '➖', '60+': '➖' }
+        },
+        {
+          name: 'Colorectal Cancer',
+          guideline: 'CAF 2025',
+          link: '#',
+          test: 'FOBT or FIT (every 2 years), or flexible sigmoidoscopy (every 10 years)',
+          frequency: 'Starting at age 50',
+          brackets: { '18-20': 'N/A', '21-29': 'N/A', '30-39': 'N/A', '40-49': 'N/A', '50-59': '🩺', '60+': '🩺' }
+        },
+        {
+          name: 'Lung Cancer',
+          guideline: 'CAF 2025',
+          link: '#',
+          test: 'Low-dose CT scan',
+          frequency: 'Starting at age 50, if smoked ≥20 years (current/former)',
+          brackets: { '18-20': '✖', '21-29': '✖', '30-39': '✖', '40-49': '✖', '50-59': '🩺', '60+': '🩺' }
+        }
+      ],
+      female: [
+        {
+          name: 'Breast Cancer',
+          guideline: 'CTFPHC, 2018',
+          link: 'https://canadiantaskforce.ca/guidelines/published-guidelines/breast-cancer-update-2024/',
+          test: 'Mammography',
+          frequency: 'Every 2–3 years starting at age 50 (optional at 40 after discussion)',
+          brackets: { '18-20': 'N/A', '21-29': 'N/A', '30-39': 'N/A', '40-49': '🩺', '50-59': '🩺', '60+': '🩺' }
+        },
+        {
+          name: 'Cervical Cancer',
+          guideline: 'CTFPHC, 2013',
+          link: 'https://canadiantaskforce.ca/Guidelines',
+          test: 'Pap test or HPV testing',
+          frequency: 'Start at age 21, universal screening from age 25, every 3–5 years',
+          brackets: { '18-20': '✖', '21-29': '🩺', '30-39': '🩺', '40-49': '🩺', '50-59': '🩺', '60+': '🩺' }
+        },
+        {
+          name: 'Osteoporosis',
+          guideline: 'Osteoporosis Canada, 2023',
+          link: 'https://www.cmaj.ca/content/195/39/E1333?rss=1#T1',
+          test: 'FRAX risk assessment (Canadian version)',
+          frequency: 'Recommended for postmenopausal women ≥50 years',
+          brackets: { '18-20': '➖', '21-29': '➖', '30-39': '➖', '40-49': '➖', '50-59': '➕', '60+': '➕' }
+        }
+      ],
+      male: [
+        {
+          name: 'Prostate Cancer',
+          guideline: 'CUA, 2022',
+          link: 'https://www.cua.org/system/files/Guideline-Files/7851_v6_1.pdf',
+          test: 'PSA testing',
+          frequency: 'Optional screening for 50–69 after discussion of benefits/risks',
+          brackets: { '18-20': '➖', '21-29': '➖', '30-39': '➖', '40-49': '➖', '50-59': '➖', '60+': '➖' }
+        },
+        {
+          name: 'Abdominal Aortic Aneurysm',
+          guideline: 'CTFPHC, 2017',
+          link: 'https://canadiantaskforce.ca/guidelines/published-guidelines/abdominal-aortic-aneurysm/',
+          test: 'One-time ultrasound',
+          frequency: 'Once at age 65 if male and ever smoked',
+          brackets: { '18-20': '✖', '21-29': '✖', '30-39': '✖', '40-49': '✖', '50-59': '✖', '60+': '➕' }
+        }
+      ]
     };
 
     // Placeholder: Insert complete screening data for universal, female, and male here
