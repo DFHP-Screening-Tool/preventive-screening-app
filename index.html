@@ -145,9 +145,8 @@
       '✖': 'Strong recommendation against',
       '🩺': 'Eligible for screening, discuss with provider'
     };
-
-    const screeningData = {
-      universal: [
+ {
+    const universalrecommendations = [
         {
           name: 'Type 2 Diabetes',
           guideline: 'Diabetes Canada Guidelines, 2018',
@@ -211,10 +210,12 @@
           test: 'Annual dental examination',
           frequency: 'Once per year',
           brackets: { '18-20': '🩺', '21-29': '🩺', '30-39': '🩺', '40-49': '🩺', '50-59': '🩺', '60+': '🩺' }
-        };
+         }
+    ];
+    
+    // Female-Specific Screening Data
+    const femaleRecommendations = [
       
-      // Female-Specific Screening Data
-    female: [
       { 
         name: 'Breast Cancer', 
         guideline: 'CAF 2025', 
