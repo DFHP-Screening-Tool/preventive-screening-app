@@ -191,7 +191,7 @@
         {
           name: 'Colorectal Cancer',
           guideline: 'CAF 2025',
-          link: '#',
+          link: 'https://www.canada.ca/en/department-national-defence/services/benefits-military/health-support/cancer-screening.html',
           test: 'FOBT or FIT (every 2 years), or flexible sigmoidoscopy (every 10 years)',
           frequency: 'Starting at age 50',
           brackets: { '18-20': 'N/A', '21-29': 'N/A', '30-39': 'N/A', '40-49': 'N/A', '50-59': '🩺', '60+': '🩺' }
@@ -199,7 +199,7 @@
         {
           name: 'Lung Cancer',
           guideline: 'CAF 2025',
-          link: '#',
+          link: 'https://www.canada.ca/en/department-national-defence/services/benefits-military/health-support/cancer-screening.html',
           test: 'Low-dose CT scan',
           frequency: 'Starting at age 50, if smoked ≥20 years (current/former)',
           brackets: { '18-20': '✖', '21-29': '✖', '30-39': '✖', '40-49': '✖', '50-59': '🩺', '60+': '🩺' }
@@ -212,9 +212,48 @@
           frequency: 'Once per year',
           brackets: { '18-20': '🩺', '21-29': '🩺', '30-39': '🩺', '40-49': '🩺', '50-59': '🩺', '60+': '🩺' }
         }
-      ],
-      female: [ /* unchanged */ ],
-      male: [ /* unchanged */ ]
+       // Female-Specific Screening Data
+     const femaleRecommendations = [
+       { 
+         name: 'Breast Cancer', 
+         guideline: 'CAF 2025', 
+         link: 'https://www.canada.ca/en/department-national-defence/services/benefits-military/health-support/cancer-screening.html', 
+         test: 'Mammography',
+         frequency: 'Starting at age 40 every 2-3 years',
+         brackets: { '18-20': 'N/A', '21-29': 'N/A', '30-39': 'N/A', '40-49': '🩺', '50-59': '🩺', '60+': '🩺' } 
+       },
+       { 
+         name: 'Cervical Cancer', 
+         guideline: 'CAF 2025', 
+         link: 'https://www.canada.ca/en/department-national-defence/services/benefits-military/health-support/cancer-screening.html', 
+         test: 'Pap test',
+         frequency: 'Starting at age 21 every 3 years',
+         brackets: { '18-20': '✖', '21-29': '🩺', '30-39': '🩺', '40-49': '🩺', '50-59': '🩺', '60+': '🩺' } 
+       },
+       { 
+         name: 'Osteoporosis', 
+         guideline: 'Osteoporosis Canada, 2023', 
+         link: 'https://www.cmaj.ca/content/195/39/E1333?rss=1#T1', 
+         brackets: { '18-20': '➖', '21-29': '➖', '30-39': '➖', '40-49': '➖', '50-59': '➕', '60+': '➕' } 
+       }
+     ];
+ 
+     // Male-Specific Screening Data
+     const maleRecommendations = [
+       { 
+         name: 'Prostate Cancer', 
+         guideline: 'CAF 2025', 
+         link: 'https://www.canada.ca/en/department-national-defence/services/benefits-military/health-support/cancer-screening.html',
+         test: 'PSA',
+         brackets: { '18-20': '➖', '21-29': '➖', '30-39': '➖', '40-49': '➖', '50-59': '➖', '60+': '➖' } 
+       },
+       { 
+         name: 'Abdominal Aortic Aneurysm', 
+         guideline: 'CTFPHC, 2017', 
+         link: 'https://canadiantaskforce.ca/guidelines/published-guidelines/abdominal-aortic-aneurysm/', 
+         brackets: { '18-20': '✖', '21-29': '✖', '30-39': '✖', '40-49': '✖', '50-59': '✖', '60+': '➕' } 
+       }
+     ];
     };
 
     function getAgeBracket(age) {
