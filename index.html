@@ -1,343 +1,173 @@
+
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CAF Preventive Medicine</title>
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-      color: #333;
-      line-height: 1.6;
-    }
-    header {
-      background-color: #003366;
-      padding: 15px 20px;
-      text-align: center;
-      color: white;
-    }
-    .container {
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-    h1, h2 {
-      color: #003366;
-      text-align: center;
-    }
-    p.intro {
-      text-align: center;
-      font-size: 1.1rem;
-      margin-bottom: 30px;
-    }
-    .my-image {
-      display: block;
-      margin: 20px auto;
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-    form {
-      background: #ffffff;
+      font-family: Arial, sans-serif;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-      max-width: 400px;
-      margin: 0 auto 30px;
     }
-    form label, form input, form select, form button {
-      display: block;
-      width: 100%;
-      margin-top: 15px;
-      font-size: 1rem;
-    }
-    form input, form select {
-      padding: 10px;
+    .recommendation {
       border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    form button {
-      background-color: #005fa3;
-      color: #ffffff;
-      border: none;
-      padding: 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    form button:hover {
-      background-color: #004c87;
-    }
-    #results {
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-      max-width: 700px;
-      margin: 0 auto 30px;
-    }
-    #results section {
-      margin-bottom: 30px;
-    }
-    #results h3 {
-      color: #005fa3;
-      margin-bottom: 15px;
-    }
-    #results ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    #results li {
       padding: 15px;
-      border-bottom: 1px solid #e6e6e6;
+      margin-bottom: 10px;
+      border-radius: 5px;
     }
-    #results li:last-child {
-      border-bottom: none;
-    }
-    #results a {
-      color: #005fa3;
-    }
-    #results a:hover {
-      color: #003366;
-      text-decoration: underline;
+    .recommendation h3 {
+      margin: 0 0 10px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>CAF Preventive Medicine</h1>
-  </header>
+  <h1>CAF Preventive Medicine Screening Recommendations</h1>
+  <form id="user-form">
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" required min="0" max="120" />
+    <br><br>
+    <label for="sex">Sex:</label>
+    <select id="sex" name="sex" required>
+      <option value="female">Female</option>
+      <option value="male">Male</option>
+    </select>
+    <br><br>
+    <button type="submit">Get Recommendations</button>
+  </form>
 
-  <div class="container">
-    <img src="pic.jpg" alt="App Preview" class="my-image" />
-
-    <p class="intro">
-      This tool suggests evidence-based preventive screening recommendations for healthy adults. Enter the patient's age and gender to get tailored guidelines, including test types and screening intervals.
-    </p>
-
-    <form id="screeningForm">
-      <label for="age">Patient Age:</label>
-      <input type="number" id="age" name="age" min="18" required>
-
-      <label for="gender">Patient Gender:</label>
-      <select id="gender" name="gender" required>
-        <option value="">Select Gender</option>
-        <option value="female">Female</option>
-        <option value="male">Male</option>
-      </select>
-
-      <button type="submit">Get Recommendations</button>
-    </form>
-
-    <div id="results"></div>
-  </div>
+  <div id="results"></div>
 
   <script>
-    const recommendationTextMap = {
-      '✔': 'Strong recommendation',
-      '➕': 'Weak recommendation',
-      '➖': 'Weak recommendation against',
-      '✖': 'Strong recommendation against',
-      '🩺': 'Eligible for screening, discuss with provider'
-    };
-
     const screeningData = {
       universal: [
         {
-          name: 'Type 2 Diabetes',
-          guideline: 'Diabetes Canada Guidelines, 2018',
-          link: 'https://guidelines.diabetes.ca/cpg/chapter4',
-          test: 'A1C and/or FPG',
-          frequency: 'Every 3 years ≥40 years or if high risk',
-          brackets: { '18-20': '➖', '21-29': '➖', '30-39': '➖', '40-49': '➕', '50-59': '➕', '60+': '➕' }
-        },
-        {
-          name: 'Hypertension',
-          guideline: 'Hypertension Canada Guidelines, 2020',
-          link: 'https://hypertension.ca/guidelines/',
-          test: 'Office blood pressure measurement',
-          frequency: 'At every appropriate primary care visit',
-          brackets: { '18-20': '✔', '21-29': '✔', '30-39': '✔', '40-49': '✔', '50-59': '✔', '60+': '✔' }
-        },
-        {
-          name: 'Obesity',
-          guideline: 'Obesity Canada Guidelines, 2020',
-          link: 'https://obesitycanada.ca/healthcare-professionals/adult-clinical-practice-guideline/',
-          test: 'Height, weight, and BMI calculation',
-          frequency: 'At every appropriate primary care visit',
-          brackets: { '18-20': '✔', '21-29': '✔', '30-39': '✔', '40-49': '✔', '50-59': '✔', '60+': '✔' }
-        },
-        {
-          name: 'Hyperlipidemia',
-          guideline: 'CCS Dyslipidemia Guidelines, 2021',
-          link: 'https://ccs.ca/guideline/2021-lipids/',
-          test: 'Lipid panel with CVD risk assessment',
-          frequency: 'Starting at age 40, as per risk tools (FRS/CLEM)',
-          brackets: { '18-20': 'N/A', '21-29': 'N/A', '30-39': 'N/A', '40-49': '✔', '50-59': '✔', '60+': '✔' }
-        },
-        {
-          name: 'Chlamydia & Gonorrhea',
-          guideline: 'CTFPHC, 2021',
-          link: 'https://canadiantaskforce.ca/guidelines/published-guidelines/chlamydia-and-gonorrhea/',
-          test: 'NAAT testing (self or clinician-collected)',
-          frequency: 'Annually for sexually active under 30, if not high-risk group',
-          brackets: { '18-20': '➕', '21-29': '➕', '30-39': '➖', '40-49': '➖', '50-59': '➖', '60+': '➖' }
+          name: 'Blood Pressure',
+          guideline: 'CTFPHC, 2013',
+          link: 'https://canadiantaskforce.ca/guidelines/published-guidelines/blood-pressure/',
+          test: 'Blood pressure measurement',
+          frequency: 'Every 2 years for adults with normal blood pressure',
+          brackets: { '18-20': '✓', '21-29': '✓', '30-39': '✓', '40-49': '✓', '50-59': '✓', '60+': '✓' }
         },
         {
           name: 'Colorectal Cancer',
-          guideline: 'CAF 2025',
-          link: 'https://www.canada.ca/en/department-national-defence/services/benefits-military/health-support/cancer-screening.html',
-          test: 'FOBT or FIT (every 2 years), or flexible sigmoidoscopy (every 10 years)',
-          frequency: 'Starting at age 50',
-          brackets: { '18-20': 'N/A', '21-29': 'N/A', '30-39': 'N/A', '40-49': 'N/A', '50-59': '🩺', '60+': '🩺' }
-        },
-        {
-          name: 'Lung Cancer',
-          guideline: 'CAF 2025',
-          link: 'https://www.canada.ca/en/department-national-defence/services/benefits-military/health-support/cancer-screening.html',
-          test: 'Low-dose CT scan',
-          frequency: 'Starting at age 50, if smoked ≥20 years (current/former)',
-          brackets: { '18-20': '✖', '21-29': '✖', '30-39': '✖', '40-49': '✖', '50-59': '🩺', '60+': '🩺' }
-        },
-        {
-          name: 'Dental Health',
-          guideline: 'CAF Dental Screening Guidelines, 2025',
-          link: '#',
-          test: 'Annual dental examination',
-          frequency: 'Once per year',
-          brackets: { '18-20': '🩺', '21-29': '🩺', '30-39': '🩺', '40-49': '🩺', '50-59': '🩺', '60+': '🩺' }
+          guideline: 'CTFPHC, 2016',
+          link: 'https://canadiantaskforce.ca/guidelines/published-guidelines/colorectal-cancer/',
+          test: 'FOBT or FIT',
+          frequency: 'Every 2 years from age 50 to 74',
+          brackets: { '18-20': '✖', '21-29': '✖', '30-39': '✖', '40-49': '✖', '50-59': '✓', '60+': '✓' }
         }
-         ];
-        };
-      
-    
-   // Female-Specific Screening Data
-     const femaleRecommendations = [
-       { 
-         name: 'Breast Cancer', 
-         guideline: 'CAF 2025', 
-         link: 'https://www.canada.ca/en/department-national-defence/services/benefits-military/health-support/cancer-screening.html', 
-         test: 'Mammography',
-         frequency: 'Starting at age 40 every 2-3 years',
-         brackets: { '18-20': 'N/A', '21-29': 'N/A', '30-39': 'N/A', '40-49': '🩺', '50-59': '🩺', '60+': '🩺' } 
-       },
-       { 
-         name: 'Cervical Cancer', 
-         guideline: 'CAF 2025', 
-         link: 'https://www.canada.ca/en/department-national-defence/services/benefits-military/health-support/cancer-screening.html', 
-         test: 'Pap test',
-         frequency: 'Starting at age 21 every 3 years',
-         brackets: { '18-20': '✖', '21-29': '🩺', '30-39': '🩺', '40-49': '🩺', '50-59': '🩺', '60+': '🩺' } 
-       },
-       { 
-         name: 'Osteoporosis', 
-         guideline: 'Osteoporosis Canada, 2023', 
-         link: 'https://www.cmaj.ca/content/195/39/E1333?rss=1#T1', 
-         brackets: { '18-20': '➖', '21-29': '➖', '30-39': '➖', '40-49': '➖', '50-59': '➕', '60+': '➕' } 
-       }
-     ];
-  };
-     // Male-Specific Screening Data
-     const maleRecommendations = {
-       { 
-         name: 'Prostate Cancer', 
-         guideline: 'CAF 2025', 
-         link: 'https://www.canada.ca/en/department-national-defence/services/benefits-military/health-support/cancer-screening.html',
-         test: 'PSA',
-         brackets: { '18-20': '➖', '21-29': '➖', '30-39': '➖', '40-49': '➖', '50-59': '➖', '60+': '➖' } 
-       },
-       { 
-         name: 'Abdominal Aortic Aneurysm', 
-         guideline: 'CTFPHC, 2017', 
-         link: 'https://canadiantaskforce.ca/guidelines/published-guidelines/abdominal-aortic-aneurysm/', 
-         brackets: { '18-20': '✖', '21-29': '✖', '30-39': '✖', '40-49': '✖', '50-59': '✖', '60+': '➕' } 
-       }
-     ];
+      ],
+      female: [
+        {
+          name: 'Cervical Cancer',
+          guideline: 'CTFPHC, 2013',
+          link: 'https://canadiantaskforce.ca/guidelines/published-guidelines/cervical-cancer/',
+          test: 'Pap smear',
+          frequency: 'Every 3 years from age 25 to 69',
+          brackets: { '18-20': '✖', '21-29': '✓', '30-39': '✓', '40-49': '✓', '50-59': '✓', '60+': '✓' }
+        },
+        {
+          name: 'Breast Cancer',
+          guideline: 'CTFPHC, 2018',
+          link: 'https://canadiantaskforce.ca/guidelines/published-guidelines/breast-cancer/',
+          test: 'Mammogram',
+          frequency: 'Every 2–3 years for women aged 50–74',
+          brackets: { '18-20': '✖', '21-29': '✖', '30-39': '✖', '40-49': '✖', '50-59': '✓', '60+': '✓' }
+        },
+        {
+          name: 'Osteoporosis',
+          guideline: 'CTFPHC, 2010',
+          link: 'https://canadiantaskforce.ca/guidelines/published-guidelines/osteoporosis/',
+          test: 'Bone Mineral Density (DXA)',
+          frequency: 'Starting at age 65 or younger if high risk',
+          brackets: { '18-20': '✖', '21-29': '✖', '30-39': '✖', '40-49': '✖', '50-59': '✖', '60+': '✓' }
+        }
+      ],
+      male: [
+        {
+          name: 'Prostate Cancer',
+          guideline: 'CAF 2025',
+          link: 'https://www.canada.ca/en/department-national-defence/services/benefits-military/health-support/cancer-screening.html',
+          test: 'PSA',
+          frequency: 'Discuss starting at age 50, or earlier if high risk',
+          brackets: { '18-20': '➖', '21-29': '➖', '30-39': '➖', '40-49': '➖', '50-59': '➖', '60+': '➖' }
+        },
+        {
+          name: 'Abdominal Aortic Aneurysm',
+          guideline: 'CTFPHC, 2017',
+          link: 'https://canadiantaskforce.ca/guidelines/published-guidelines/abdominal-aortic-aneurysm/',
+          test: 'Abdominal ultrasound',
+          frequency: 'One-time screening for men 65–80 who ever smoked',
+          brackets: { '18-20': '✖', '21-29': '✖', '30-39': '✖', '40-49': '✖', '50-59': '✖', '60+': '✓' }
+        }
+      ]
     };
 
     function getAgeBracket(age) {
-      if (age >= 18 && age <= 20) return '18-20';
-      if (age >= 21 && age <= 29) return '21-29';
-      if (age >= 30 && age <= 39) return '30-39';
-      if (age >= 40 && age <= 49) return '40-49';
-      if (age >= 50 && age <= 59) return '50-59';
-      if (age >= 60) return '60+';
-      return null;
+      if (age < 21) return '18-20';
+      if (age < 30) return '21-29';
+      if (age < 40) return '30-39';
+      if (age < 50) return '40-49';
+      if (age < 60) return '50-59';
+      return '60+';
     }
 
-    function getRecommendations(age, gender) {
-      const ageBracket = getAgeBracket(age);
-      const results = { universal: [], female: [], male: [] };
+    function getRecommendations(age, sex) {
+      const bracket = getAgeBracket(age);
+      let items = [];
 
-      ['universal'].forEach(category => {
-        screeningData[category].forEach(rec => {
-          const symbol = rec.brackets[ageBracket];
-          if (symbol && recommendationTextMap[symbol]) {
-            results[category].push({ ...rec, symbol, text: recommendationTextMap[symbol] });
-          }
-        });
+      screeningData.universal.forEach(rec => {
+        if (rec.brackets[bracket] === '✓') {
+          items.push(rec);
+        }
       });
 
-      if (gender === 'female') {
+      if (sex === 'female') {
         screeningData.female.forEach(rec => {
-          const symbol = rec.brackets[ageBracket];
-          if (symbol && recommendationTextMap[symbol]) {
-            results.female.push({ ...rec, symbol, text: recommendationTextMap[symbol] });
+          if (rec.brackets[bracket] === '✓') {
+            items.push(rec);
           }
         });
-      }
-
-      if (gender === 'male') {
+      } else if (sex === 'male') {
         screeningData.male.forEach(rec => {
-          const symbol = rec.brackets[ageBracket];
-          if (symbol && recommendationTextMap[symbol]) {
-            results.male.push({ ...rec, symbol, text: recommendationTextMap[symbol] });
+          if (rec.brackets[bracket] === '✓') {
+            items.push(rec);
           }
         });
       }
 
-      return results;
+      return items;
     }
 
-    document.getElementById('screeningForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const age = parseInt(document.getElementById('age').value, 10);
-      const gender = document.getElementById('gender').value;
-      const results = getRecommendations(age, gender);
-      const resultsDiv = document.getElementById('results');
+    document.getElementById('user-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const age = parseInt(document.getElementById('age').value);
+      const sex = document.getElementById('sex').value;
+      const results = document.getElementById('results');
+      results.innerHTML = '';
 
-      resultsDiv.innerHTML = '<h2>Screening Recommendations</h2>';
+      const recs = getRecommendations(age, sex);
+      if (recs.length === 0) {
+        results.innerHTML = '<p>No specific screenings are currently recommended based on your input.</p>';
+        return;
+      }
 
-      const renderCategory = (label, items) => {
-        if (items.length === 0) return '';
-        const ul = document.createElement('ul');
-        items.forEach(rec => {
-          const li = document.createElement('li');
-          li.innerHTML = `
-            <strong>${rec.name}</strong><br>
-            <em>${rec.text}</em> (${rec.symbol})<br>
-            <strong>Test:</strong> ${rec.test}<br>
-            <strong>Frequency:</strong> ${rec.frequency}<br>
-            <a href="${rec.link}" target="_blank">${rec.guideline}</a>
-          `;
-          ul.appendChild(li);
-        });
-        const section = document.createElement('section');
-        section.innerHTML = `<h3>${label}</h3>`;
-        section.appendChild(ul);
-        return section;
-      };
-
-      ['universal', 'female', 'male'].forEach(cat => {
-        const section = renderCategory(cat.charAt(0).toUpperCase() + cat.slice(1) + ' Screening', results[cat]);
-        if (section) resultsDiv.appendChild(section);
+      recs.forEach(rec => {
+        const div = document.createElement('div');
+        div.classList.add('recommendation');
+        div.innerHTML = `
+          <h3>${rec.name}</h3>
+          <p><strong>Test:</strong> ${rec.test}</p>
+          <p><strong>Frequency:</strong> ${rec.frequency}</p>
+          <p><strong>Guideline:</strong> <a href="${rec.link}" target="_blank">${rec.guideline}</a></p>
+        `;
+        results.appendChild(div);
       });
     });
   </script>
 </body>
 </html>
+```
+
