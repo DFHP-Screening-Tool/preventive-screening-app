@@ -111,6 +111,52 @@
     }
   </style>
 </head>
+  <script>
+  const screeningData = {
+    // Sample data structure
+    "male": {
+      "40-49": ["Blood pressure screening every 2 years", "Lipid profile every 5 years"],
+      "50-59": ["Colorectal cancer screening", "Lipid profile every 5 years"],
+      "60+": ["Colorectal cancer screening", "Diabetes screening"]
+    },
+    "female": {
+      "40-49": ["Mammogram every 2 years", "Cervical cancer screening"],
+      "50-59": ["Colorectal cancer screening", "Bone density screening"],
+      "60+": ["Breast cancer screening", "Diabetes screening"]
+    }
+  };
+
+  function getAgeRange(age) {
+    if (age >= 60) return "60+";
+    if (age >= 50) return "50-59";
+    if (age >= 40) return "40-49";
+    return null;
+  }
+
+  document.getElementById("screening-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const age = parseInt(document.getElementById("age").value);
+    const sex = document.getElementById("sex").value;
+
+    const ageRange = getAgeRange(age);
+    const recommendationsDiv = document.getElementById("recommendations");
+
+    if (!ageRange || !screeningData[sex] || !screeningData[sex][ageRange]) {
+      recommendationsDiv.innerHTML = `<p class="text-red-500">No recommendations available for this input.</p>`;
+      return;
+    }
+
+    const recs = screeningData[sex][ageRange];
+    recommendationsDiv.innerHTML = `
+      <h2 class="text-xl font-semibold mb-2">Recommended Screenings:</h2>
+      <ul class="list-disc pl-5 space-y-1">
+        ${recs.map(r => `<li>${r}</li>`).join('')}
+      </ul>
+    `;
+  });
+</script>
+
 <body>
   <header>
     <h1>CAF Preventive Medicine</h1>
