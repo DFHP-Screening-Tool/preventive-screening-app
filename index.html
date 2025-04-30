@@ -213,7 +213,27 @@
           brackets: { '18-20': '🩺', '21-29': '🩺', '30-39': '🩺', '40-49': '🩺', '50-59': '🩺', '60+': '🩺' }
         }
       ],
-      female: [ /* unchanged */ ],
+      // Female-Specific Screening Data
+    const femaleRecommendations = [
+      { 
+        name: 'Breast Cancer', 
+        guideline: 'CAF 2025', 
+        link: '#', 
+        brackets: { '18-20': 'N/A', '21-29': 'N/A', '30-39': 'N/A', '40-49': '🩺', '50-59': '🩺', '60+': '🩺' } 
+      },
+      { 
+        name: 'Cervical Cancer', 
+        guideline: 'CTFPHC, Cervical Cancer Screening (2013)', 
+        link: 'https://canadiantaskforce.ca/Guidelines', 
+        brackets: { '18-20': '✖', '21-29': '➕', '30-39': '✔', '40-49': '✔', '50-59': '✔', '60+': '✔' } 
+      },
+      { 
+        name: 'Osteoporosis', 
+        guideline: 'Osteoporosis Canada, 2023', 
+        link: 'https://www.cmaj.ca/content/195/39/E1333?rss=1#T1', 
+        brackets: { '18-20': '➖', '21-29': '➖', '30-39': '➖', '40-49': '➖', '50-59': '➕', '60+': '➕' } 
+      }
+    ];
       male: [ /* unchanged */ ]
     };
 
