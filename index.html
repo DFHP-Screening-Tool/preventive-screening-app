@@ -213,9 +213,53 @@
           brackets: { '18-20': '🩺', '21-29': '🩺', '30-39': '🩺', '40-49': '🩺', '50-59': '🩺', '60+': '🩺' }
         }
       ],
-      female: [ /* unchanged */ ],
-      male: [ /* unchanged */ ]
+           female: [
+        {
+          name: 'Breast Cancer',
+          guideline: 'CAF 2025',
+          link: 'https://www.canada.ca/en/department-national-defence/services/benefits-military/health-support/cancer-screening.html',
+          test: 'Mammography',
+          frequency: 'Every 2–3 years, starting at 40–50 depending on risk',
+          brackets: { '18-20': 'N/A', '21-29': 'N/A', '30-39': 'N/A', '40-49': '🩺', '50-59': '🩺', '60+': '🩺' }
+        },
+        {
+          name: 'Cervical Cancer',
+          guideline: 'CAF 2025',
+          link: 'https://www.canada.ca/en/department-national-defence/services/benefits-military/health-support/cancer-screening.html',
+          test: 'Pap test +/- HPV',
+          frequency: 'Every 3 years, starting at age 21',
+          brackets: { '18-20': '✖', '21-29': '🩺', '30-39': '🩺', '40-49': '🩺', '50-59': '🩺', '60+': '🩺' }
+        },
+        {
+          name: 'Osteoporosis',
+          guideline: 'Osteoporosis Canada, 2023',
+          link: 'https://www.cmaj.ca/content/195/39/E1333?rss=1#T1',
+          test: 'Bone mineral density (BMD) testing',
+          frequency: 'Starting at age 50, or younger if risk factors',
+          brackets: { '18-20': '➖', '21-29': '➖', '30-39': '➖', '40-49': '➖', '50-59': '➕', '60+': '➕' }
+        }
+      ],
+      male: [
+        {
+          name: 'Prostate Cancer',
+          guideline: 'CTFPHC (2014)/CUA (2022)',
+          link: 'https://www.cua.org/system/files/Guideline-Files/7851_v6_1.pdf',
+          test: 'PSA blood test +/- DRE',
+          frequency: 'Every 2–4 years, shared decision-making starting at 50+',
+          brackets: { '18-20': '➖', '21-29': '➖', '30-39': '➖', '40-49': '➖', '50-59': '➖', '60+': '➖' }
+        },
+        {
+          name: 'Abdominal Aortic Aneurysm',
+          guideline: 'CTFPHC, 2017',
+          link: 'https://canadiantaskforce.ca/guidelines/published-guidelines/abdominal-aortic-aneurysm/',
+          test: 'Abdominal ultrasound',
+          frequency: 'One-time between 65–80 if ever smoked',
+          brackets: { '18-20': '✖', '21-29': '✖', '30-39': '✖', '40-49': '✖', '50-59': '✖', '60+': '➕' }
+        }
+      ]
     };
+
+
 
     function getAgeBracket(age) {
       if (age >= 18 && age <= 20) return '18-20';
